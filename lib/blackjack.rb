@@ -2,7 +2,7 @@ def welcome
   # code #welcome here
   puts "Welcome to the Blackjack Table"
 end
-
+ 
 def deal_card
   # code #deal_card here
   card = rand(1..11)
@@ -39,15 +39,16 @@ end
 
 def hit?(initial_round)
   # code hit? here
- prompt_user
- draw = get_user_input
- if draw == "h"
-  initial_round += deal_card
-  return initial_round
-elsif draw == "s"
+  prompt_user
+  draw = get_user_input
+  if draw == "h"
+    initial_round += deal_card
+    return initial_round
+  elsif draw == "s"
     return(initial_round)
-end
-end
+    prompt_user
+    end
+  end
 
 def invalid_command
   # code invalid_command here
@@ -62,9 +63,15 @@ def runner
   # code runner here
   welcome
   initial_round
-  until initial_round > 21
+  display_card_total(initial_round)
+  until initial_round > 21 do 
     prompt_user
+    get_user_input
+    if get_user_input == "h"
+      hit?(initial_round)
+    end
+    display_card_total(initial_round)
   end
-  end_game
+  end_game(initial_round)
 end
-    
+  
